@@ -2,7 +2,7 @@ package br.com.viniciust.handler;
 
 
 import br.com.viniciust.exception.ExceptionResponse;
-import br.com.viniciust.exception.UnsuportedMathOperationException;
+import br.com.viniciust.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,7 +29,7 @@ public class CustomizeResponseEntityExceptionHandler extends ResponseEntityExcep
     }
 
 
-    @ExceptionHandler(UnsuportedMathOperationException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     private final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(Exception ex, WebRequest request){
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(

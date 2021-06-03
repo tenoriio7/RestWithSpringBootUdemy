@@ -1,22 +1,35 @@
 package br.com.viniciust.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "person")
 public class Person implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //hibernate gera o id
     private  Long id;
+
+    @Column(name = "first_name",nullable = false)
     private  String firstName;
+
+    @Column(name = "last_name", nullable = false)
     private  String lastName;
+
+    @Column(name = "gender", nullable = false)
     private  String gender;
-    private String  adress;
+
+    @Column(name = "address", nullable = false)
+    private String  address;
 
     public String getAdress() {
-        return adress;
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAdress(String address) {
+        this.address = address;
     }
 
     public Person() {

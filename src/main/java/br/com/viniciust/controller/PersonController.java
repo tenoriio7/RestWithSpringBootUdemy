@@ -3,7 +3,7 @@ package br.com.viniciust.controller;
 import br.com.viniciust.model.Person;
 import br.com.viniciust.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,32 +15,28 @@ public class PersonController {
     @Autowired
     private PersonService services;
 
-    @RequestMapping(value="/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") String id){
+    @GetMapping(value="/{id}")
+    public Person findById(@PathVariable("id") Long id){
         return services.findById(id);
     }
 
-    @RequestMapping(value="/all",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all")
     public List<Person> findAll(){
         return services.findAll();
     }
 
-
-    @RequestMapping(method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public Person create(@RequestBody Person person){
         return services.create(person);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+         services.delete(id);
+         return  ResponseEntity.ok().build();
+    }
 
-    @RequestMapping(method = RequestMethod.PUT,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+   @PutMapping
     public Person update(@RequestBody Person person){
         return services.update(person);
     }
